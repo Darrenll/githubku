@@ -1,0 +1,71 @@
+//写一个猜数字游戏
+//1.自动产生0-100的数字
+//2.猜数字：
+//  a如果猜对了，恭喜你，游戏结束
+//  b 如果猜错了，那么会告诉你猜大了猜小了
+//3.游戏可以一直玩，除非推出游戏
+
+void menu()
+{
+	printf("************************\n");
+	printf("******* 1.play *********\n");
+	printf("******* 0.exit *********\n");
+	printf("************************\n");
+}
+#include<time.h>
+#include<stdlib.h>
+void game()
+{
+	int i = 0;
+	int ret = rand() % 100 - 1;
+	while (1)
+	{
+		printf("请选择数字:>");
+		scanf("%d", &i);
+		if (i > ret)
+		{
+			printf("猜大了\n");
+		}
+		else if (i < ret)
+			printf("猜小了\n");
+		else
+		{
+			printf("猜对了:%d\n", ret);
+			break;
+		}
+	
+	}
+}
+
+int main()
+{
+	int k = 0;
+	//srand函数中用time时间戳，随时变化所以存在随机数，另外把time函数的返回值强制改为unsigned int
+	//srand(seed)用于给rand()函数设定种子，参数seed是rand()的种子，用来初始化rand()的起始值
+	srand((unsigned int)time(NULL));
+	do
+	{
+		//打印菜单
+		menu();
+		printf("请输入是否进行游戏:>");
+		scanf("%d", &k);
+		switch(k)
+		{
+		case 1:
+			game();
+		case 0:
+			printf("退出游戏\n");
+			break;
+		default:
+			printf("选择错误，重新选择\n");
+			break;
+		}
+	} while (k);
+	return 0;
+}
+//总结：
+//1.打印菜单（说明页面）
+//2.输入是否参加游戏
+// a.根据“0是退出游戏，1是参加游戏，其他进行循环”可以用do while语句，可以保证0或1都有一次循环
+// b.然后可以用switch语句（从上往下的一次循环）进行判断，1进行游戏，0退出游戏，其他说明再继续循环
+//3.设置game函数，设定随机数，用死循环猜数字，正确跳出，其他继续猜
