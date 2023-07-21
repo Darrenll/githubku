@@ -1,0 +1,17 @@
+递归实现n的k次方
+int Multiple(int n, int k)
+{
+	if (k > 1)
+		return n * Multiple(n, k - 1);
+	else
+		return n;
+}
+int main()
+{
+	int n = 0;
+	int k = 0;
+	scanf("%d %d", &n, &k);
+	int count = Multiple(n, k);
+	printf("%d", count);
+	return 0;
+}
