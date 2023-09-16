@@ -1,0 +1,34 @@
+#define _CRT_SECURE_NO_WARNINGS 1 
+#include<stdio.h>
+#include<math.h>
+
+//求Sn=a+aa+aaa+aaaa+aaaaa的值，其中a是一个数字
+int Sum(int a,int i)
+{
+	if (i > 10)
+	{
+		int s = 0;
+		//计算出aaaaa的值
+		for(int j = log10(i);j>0;j--)
+		{
+			s += a * pow(10, j-1);
+		}
+		//由大到小的思路，Sum(a,i)=aaaaa+Sum(a,i/10),Sum(a,i/10)=aaaa+Sum(a,i/10)
+		//注意，这里a不变，i在变化
+		return(s + Sum(a, i / 10));
+	}
+	else
+		return a;
+}
+
+int main()
+{
+	int i = 0;
+	int a = 0;
+	int n = 0;
+	printf("请输入a n的值(n表示几项)：");
+	scanf("%d %d", &a,&n);
+	i = pow(10, n);
+	printf("%d", Sum(a,i));
+	return 0;
+}
